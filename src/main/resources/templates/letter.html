@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="title" type="xyz"*/-->
+    <title th:text="${title}">title</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../css/total.css" />
+    <link href="/bootstrap/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/flat-ui.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navv">
+        <ul class="container">
+            <li><a href="/manage/list">회원목록</a></li>
+            <li>|</li>
+            <li><a class="active" href="/letter/write">쪽지</a></li>
+            <li>|</li>
+            <li><a href="/attend/list">참석여부</a></li>
+            <li>|</li>
+            <li><a href="/send/list">보냄</a></li>
+        </ul>
+    </div> <!-- End Nav -->
+    <div class="container">
+        <div class="btn-group letter_drop">
+            <button data-toggle="dropdown" class="btn dropdown-toggle" type="button">선택하세요.
+                <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+                <li><a href="#">동아리(학회) 공지</a></li>
+                <li><a href="#">참석여부</a></li>
+            </ul>
+        </div><!-- /btn-group -->
+        <form>
+            <label>동아리이름</label>
+            <input class="form-control" type="text"/>
+            <label class="letter_label">제목</label>
+            <input class="form-control" type="text"/>
+            <label class="letter_label">내용</label>
+            <textarea class="form-control" rows="13"></textarea>
+            <div id="letter_btn_div">
+                <button class="btn btn-lg letter_btn" type="submit">보내기</button>
+            </div>
+        </form>
+    </div>
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="/bootstrap/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/vendor/video.js"></script>
+    <script src="/bootstrap/js/flat-ui.min.js"></script>
+    <script>
+        $(".dropdown-menu li a").click(function(){
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+@media screen and (max-width: 650px) {
+    html, body{
+        width: 100%;
+        height: 100%;
+    }
+
+    .form-control .form-control:focus {
+        border-color: #F7947A;
+    }
+    .btn{
+        background-color: #F7947A;
+    }
+    .navv{
+        border-bottom: 1px solid #c1c1c1;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
+    }
+    .navv ul{
+        margin: 5px auto;
+        padding: 0;
+        width: 260px;
+    }
+    .navv li{
+        padding: 0 5px;
+        margin: 0;
+        display: inline-block;
+        color: #000;
+        font-size: 15px;
+    }
+    .navv a {
+        /*color: #000;*/
+    }
+    .navv a:hover .active{
+        color:#F7947A;
+        font-weight: 600;
+    }
+    a:hover, .active{
+        color:#F7947A;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .container{
+        height: 100%;
+        margin-top: 20px;
+    }
+
+    /*selectPage.css*/
+    .vertical{
+        display: table;
+    }
+
+    .vertical_con{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .select_card{
+        background-color: #F7947A;
+        padding: 14px;
+        margin-top: 5%;
+    }
+    .select_card_two{
+        background-color: #fbc9bc;
+        padding: 14px;
+        margin-top: 5%;
+    }
+    .select_card>img{
+        display: block;
+        margin: auto;
+        width: 40%;
+    }
+    .select_card_two>img{
+        display: block;
+        margin: auto;
+        width: 40%;
+    }
+    .select_card h4{
+        text-align: center;
+        font-weight: 600;
+        margin-top: 15%;
+        color: #fff;
+    }
+    .select_card_two h4{
+        text-align: center;
+        font-weight: 600;
+        margin-top: 15%;
+        color: #fff;
+    }
+
+    /*userList.css*/
+    .manage_users_table{
+        border-collapse:collapse;
+        margin: 2% auto;
+        table-layout:fixed;
+    }
+    .manage_users_table th{
+        border: 1px solid black;
+        text-align: center;
+
+    }
+    .manage_users_table td{
+        border: 1px solid black;
+        text-align: center;
+        padding:0 5px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+
+    }
+    .pageDiv{
+        text-align: center;
+    }
+    /*letter.css*/
+    .dropdown-toggle{
+        background-color: #F7947A;
+    }
+    .letter_drop{
+        margin-bottom: 30px;
+    }
+    #letter_btn_div{
+        margin: 20px auto;
+        width:87px;
+    }
+    /*send.css*/
+    .flat-form {
+        background: #fff;
+        margin: 25px auto;
+        width: 100%;
+        height: 200%;
+        position: relative;
+    }
+    .tabs {
+        background: #F7947A;
+        height: 52px;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        width: 100%;
+        position: relative;
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid #E2D6D4;
+    }
+    .tabs li {
+        display: block;
+        float: left;
+        margin: 0;
+        padding: 0;
+    }
+    .tabs a {
+        background: #F7947A;
+        display: block;
+        float: left;
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+        padding: 12px 22px 12px 22px;
+        /*border-right: 1px solid @tab-border;*/
+
+    }
+    .tabs a.active {
+        background: #fff;
+        border-right: none;
+        color: #F7947A;
+        -webkit-transition: all 0.5s linear;
+        -moz-transition: all 0.5s linear;
+        transition: all 0.5s linear;
+    }
+    .tabs a:hover{
+        color: #6A7071;
+    }
+    .form-action {
+        position: relative;
+    }
+}
+@media screen and (min-width: 651px) {
+    html, body{
+        width: 100%;
+        height: 100%;
+    }
+    #showPage{
+        display: inline-block;
+        margin-right: -2px;
+        word-spacing: normal;
+        vertical-align: middle;
+    }
+    .form-control .form-control:focus {
+        border-color: #F7947A;
+        outline: 0;
+        box-shadow: none;
+    }
+    .btn{
+        background-color: #F7947A;
+    }
+    .navv{
+        border-bottom: 1px solid #c1c1c1;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
+    }
+    .navv ul{
+        margin: 5px auto;
+    }
+    .navv li{
+        padding: 0 2%;
+        margin: 0;
+        display: inline-block;
+        color: #000;
+        font-size: 15px;
+    }
+    .navv a {
+        /*color: #000;*/
+    }
+    .navv a:hover .active{
+        color:#F7947A;
+        font-weight: 600;
+    }
+    a:hover, .active{
+        color:#F7947A;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .container{
+        height: 100%;
+        margin-top: 20px;
+    }
+
+    /*selectPage.css*/
+    .vertical{
+        display: table;
+    }
+
+    .vertical_con{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .select_card{
+        background-color: #F7947A;
+        padding: 14px;
+        margin-top: 5%;
+    }
+    .select_card_two{
+        background-color: #fbc9bc;
+        padding: 14px;
+        margin-top: 5%;
+    }
+    .select_card>img{
+        display: block;
+        margin: auto;
+        width: 40%;
+    }
+    .select_card_two>img{
+        display: block;
+        margin: auto;
+        width: 40%;
+    }
+    .select_card h4{
+        text-align: center;
+        font-weight: 600;
+        margin-top: 15%;
+        color: #fff;
+    }
+    .select_card_two h4{
+        text-align: center;
+        font-weight: 600;
+        margin-top: 15%;
+        color: #fff;
+    }
+
+    /*userList.css*/
+    .manage_users_table{
+        border-collapse:collapse;
+        margin: 2% auto;
+    }
+    .manage_users_table th{
+        border: 1px solid black;
+        text-align: center;
+
+    }
+    .manage_users_table td{
+        border: 1px solid black;
+        text-align: center;
+        padding:0 15px;
+    }
+    .pageDiv{
+        text-align: center;
+    }
+    /*letter.css*/
+    .dropdown-toggle{
+        background-color: #F7947A;
+    }
+    .letter_drop{
+        margin-bottom: 30px;
+    }
+    #letter_btn_div{
+        margin: 20px auto;
+        width:8%;
+    }
+    .letter_label{
+        margin-top: 20px;
+    }
+    /*send.css*/
+    .flat-form {
+        background: #fff;
+        margin: 25px auto;
+        width: 90%;
+        height: 150%;
+        position: relative;
+        border: 1px solid #E2D6D4;
+    }
+    .tabs {
+        background: #F7947A;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        width: 100%;
+        position: relative;
+        display: block;
+        margin-bottom: 20px;
+        /*border-bottom: 1px solid #000;*/
+    }
+    .tabs li {
+        display: block;
+        float: left;
+        margin: 0;
+        padding: 0;
+    }
+    .tabs a {
+        background: #F7947A;
+        display: block;
+        float: left;
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+        padding: 12px 22px 12px 22px;
+        /*border-right: 1px solid @tab-border;*/
+
+    }
+    .tabs li:last-child a {
+        border-right: none;
+        width: 174px;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+    }
+    .tabs a.active {
+        background: #fff;
+        border-right: none;
+        color: #F7947A;
+        -webkit-transition: all 0.5s linear;
+        -moz-transition: all 0.5s linear;
+        transition: all 0.5s linear;
+    }
+    .tabs a:hover{
+        color: #6A7071;
+    }
+    .form-action {
+        padding: 0 20px;
+        position: relative;
+    }
+}
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <!--/*@thymesVar id="title" type="xyz"*/-->
+    <title th:text="${title}">title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../bootstrap/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../bootstrap/css/flat-ui.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../bootstrap/img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="../bootstrap/js/vendor/html5shiv.js"></script>
+      <script src="../bootstrap/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <style media="screen">
+      body {
+        width: 100%;
+        height: 100%;
+        background-color: #F7947A;
+      }
+      .login-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        width: 40%;
+        height: 300px;
+        background-color: #edeff1;
+      }
+      .login-form .login-field:focus {
+        border-color: #F7947A;
+      }
+      .btn{
+        background-color: #F7947A;
+      }
+      @media screen and (max-width: 650px) {
+        .login-form {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+          width: 90%;
+          height: 300px;
+          background-color: #edeff1;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <form method="post" action="/user/login">
+      <div class="login-form ">
+        <div class="form-group">
+          <input type="text" class="form-control login-field" value="npe.dongauniv@gmail.com" placeholder="이메일을 입력하세요." id="login_email" name= "login_email"/>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control login-field" value="Q!2dltnals" placeholder="비밀번호를 입력하세요." id="login_pw" name="login_pw" />
+        </div>
+
+        <button class="btn btn-lg btn-block" href="#" type="submit">로그인</button>
+      </div>
+    </form>
+
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="../bootstrap/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../bootstrap/js/vendor/video.js"></script>
+    <script src="../bootstrap/js/flat-ui.min.js"></script>
+
+  </body>
+</html>

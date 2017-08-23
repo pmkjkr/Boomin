@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--@thymesVar id="title" type="String"-->
+    <title th:text="${title}">title</title>
+
+    <link rel="stylesheet" type="text/css" media="all"
+          href="/css/total.css" />
+    <!-- Loading Bootstrap -->
+    <link href="/bootstrap/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="/bootstrap/css/flat-ui.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container vertical">
+        <div class="row vertical_con">
+            <a href="/manage/list">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="select_card_two">
+                        <img src="../img/curriculum.svg" alt="회원목록"/>
+                        <h4>회원목록</h4>
+                    </div>
+                </div>
+            </a>
+            <a href="/letter/write">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="select_card">
+                        <img src="../img/letter.svg" alt="쪽지 보내기"/>
+                        <h4>쪽지 보내기</h4>
+                    </div>
+                </div>
+            </a>
+            <a href="/attend/list">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="select_card_two">
+                        <img src="../img/checked.svg" alt="참석여부"/>
+                        <h4>참석여부</h4>
+                    </div>
+                </div>
+            </a>
+            <a href="/send/list">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="select_card">
+                        <img src="../img/document.svg" alt="보낸 쪽지"/>
+                        <h4>보낸 쪽지</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="/bootstrap/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/vendor/video.js"></script>
+</body>
+</html>

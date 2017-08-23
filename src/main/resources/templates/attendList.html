@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="/css/total.css" />
+    <!--@thymesVar id="title" type="String"-->
+    <!-- Loading Bootstrap -->
+    <link href="/bootstrap/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="/bootstrap/css/flat-ui.min.css" rel="stylesheet">
+    <title th:text="${title}">title</title>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="/bootstrap/js/vendor/html5shiv.js"></script>
+    <script src="/bootstrap/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="navv">
+        <ul class="container">
+            <li><a href="/manage/list">회원목록</a></li>
+            <li>|</li>
+            <li><a href="/letter/write">쪽지</a></li>
+            <li>|</li>
+            <li><a class="active" href="/attend/list">참석여부</a></li>
+            <li>|</li>
+            <li><a href="/send/list">보냄</a></li>
+        </ul>
+    </div> <!-- End Nav -->
+    <!--@thymesVar id="count" type="String"-->
+    <div class="container">
+        <table class="manage_users_table">
+        </table>
+        <div class="pageDiv">
+            <ul class="pagination">
+                <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+                <hidden th:each="i : ${#numbers.sequence(1,count)}">
+                    <li><a th:text="${i}" th:onclick="${'javascript:loadUserList(' + i + ')'}"></a></li>
+                </hidden>
+                <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            </ul>
+        </div> <!-- /pagination -->
+
+    </div>
+
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="/bootstrap/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/vendor/video.js"></script>
+    <script src="/bootstrap/js/flat-ui.min.js"></script>
+    <script th:inline="javascript">
+        var count = [[${count}]];
+        var currentMaxIndex = 1;
+        $("document").ready(loadUserList(1));
+        $("document").ready(makePagination());
+
+        function previousPage(){
+            if (count<currentMaxIndex){
+                $("#showPage").empty();
+                for (var i = makeStartNumber(currentMaxIndex); i<makeFarFiveTime(currentMaxIndex)+1; i++){
+                    $("#showPage").append("<li><a onclick=loadUserList("+(i)+")>"+(i)+"</a></li>");
+                }
+                currentMaxIndex = makeStartNumber(currentMaxIndex)+5;
+                loadUserList(makeStartNumber(currentMaxIndex));
+            }
+        }
+
+        function nextPage(){
+            if (count>currentMaxIndex){
+                $("#showPage").empty();
+                for (var i = currentMaxIndex; i<makeCloseFiveTime(currentMaxIndex); i++){
+                    $("#showPage").append("<li><a onclick=loadUserList("+(i)+")>"+(i)+"</a></li>");
+                    currentMaxIndex++;
+                }
+                console.log(currentMaxIndex);
+                loadUserList(makeStartNumber(currentMaxIndex));
+            }
+        }
+
+        function makePagination() {
+            if (count<5) {
+                for (var i = 0; i<count; i++){
+                    $("#showPage").append("<li><a onclick='loadUserList(currentMaxIndex+1)'>test</a></li>");
+                }
+            }else{
+                for (var i = 0; i<5; i++){
+                    $("#showPage").append("<li><a onclick=loadUserList("+(currentMaxIndex)+")>"+(currentMaxIndex)+"</a></li>");
+                    currentMaxIndex++;
+                }
+            }
+        }
+
+        function makeCloseFiveTime(count){
+            if (count%5==1){
+                return count+4;
+            }else if (count%5==2){
+                return count+3;
+            }else if (count%5==3){
+                return count+2;
+            }else if (count%5==4){
+                return count+1;
+            }else{
+                return count;
+            }
+        }
+
+        function makeFarFiveTime(count){
+            if (count%5==1){
+                return count-1;
+            }else if (count%5==2){
+                return count-2;
+            }else if (count%5==3){
+                return count-3;
+            }else if (count%5==4){
+                return count-4;
+            }else{
+                return count-5;
+            }
+        }
+
+        function makeStartNumber(count){
+            if (count%5==1){
+                return count-5;
+            }else if (count%5==2){
+                return count-6;
+            }else if (count%5==3){
+                return count-7;
+            }else if (count%5==4){
+                return count-8;
+            }else{
+                return count-9;
+            }
+        }
+
+        function loadUserList(index) {
+            $.ajax({
+                type: "GET",
+                url: "/attend/api/"+index,
+                error: function () {
+                    alert("통신실패!");
+                },
+                success : function (data) {
+
+                    $(".manage_users_table").empty();
+                    $(".manage_users_table").append("<tr><th>번호</th><th>제목</th><th>날짜</th></tr>");
+                    for (var i in data) {
+                        console.log(data[i]);
+                        $(".manage_users_table").append("<tr><td>"+data[i]['id']+"</td>"
+                            +"<td><a href='./detail?id="+(data[i]['id'])+"'>"+data[i]['title']+"</a></td>"
+                            +"<td>"+data[i]['updated_at']+"</td></tr>");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

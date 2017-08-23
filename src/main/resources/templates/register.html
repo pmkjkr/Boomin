@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="title" type="xyz"*/-->
+    <title th:text="${title}">title</title>
+</head>
+<body>
+    <form method="post" get="/user/reg">
+        <span>아이디</span><input id="register_email" name= "register_email" type="email"/><br />
+        <span>비밀번호</span><input id="register_pw" name="register_pw" type="password"/><br />
+        <button id="register_button" type="submit">회원가입</button>
+    </form>
+</body>
+</html>
