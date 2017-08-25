@@ -29,23 +29,24 @@
             <li><a href="/send/list">보냄</a></li>
         </ul>
     </div> <!-- End Nav -->
-    <!--@thymesVar id="count" type="String"-->
     <div class="container">
         <div>
             <span>총 인원 : </span>
             <span th:text="${listsCount}"></span>
             <span>명, </span>
             <span>참석인원 : </span>
-            <strong><span th:text="${attendPersonCount}"></span></strong>
+            <!--@thymesVar id="countMap" type="java.util.Map<Integer,Integer>"-->
+            <strong><span th:text="${countMap.get(1) != null} ? ${countMap.get(1)} : '0' ">0</span></strong>
             <span>명</span>
         </div>
         <table class="manage_users_table" >
+            <!--/*@thymesVar id="lists" type="java.util.List<xyz.dongaboomin.attend.dto.AttendDTO>"*/-->
             <tr th:each="list : ${lists}">
                 <td th:text="${list.stuId}"></td>
                 <td th:text="${list.name}"></td>
                 <td th:text="${list.major}"></td>
                 <td th:if="${list.check_att}==0" th:text="무응답"></td>
-                <td th:if="${list.check_att}==1" th:text="응답"></td>
+                <td th:if="${list.check_att}==1" th:text="참석"></td>
                 <td th:if="${list.check_att}==2" th:text="불참"></td>
             </tr>
         </table>

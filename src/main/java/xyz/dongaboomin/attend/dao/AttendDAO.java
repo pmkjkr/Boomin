@@ -2,11 +2,14 @@ package xyz.dongaboomin.attend.dao;
 
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import xyz.dongaboomin.attend.dto.AttendCountDTO;
 import xyz.dongaboomin.attend.dto.AttendDTO;
 import xyz.dongaboomin.attend.dto.AttendLetterDTO;
 import xyz.dongaboomin.manage.dto.PartManageDTO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by horse on 2017. 8. 16..
@@ -53,12 +56,12 @@ public class AttendDAO implements AttendModel {
     }
 
     @Override
-    public long countAttendPerson(int pcircle_notis_id) {
+    public List<AttendCountDTO> countAttendPerson(int pcircle_notis_id) {
         try (Connection conn = sql2o.open()) {
-            String sql = "select count(check_att) from circle_notis WHERE pcircle_notis_id = :pcircle_notis_id GROUP BY check_att HAVING check_att=1";
+            String sql = "select check_att,count(check_att) as count_chk from circle_notis WHERE pcircle_notis_id = :pcircle_notis_id GROUP BY check_att";
             return conn.createQuery(sql)
                     .addParameter("pcircle_notis_id",pcircle_notis_id)
-                    .executeScalar(Long.class);
+                    .executeAndFetch(AttendCountDTO.class);
         }
     }
 }
