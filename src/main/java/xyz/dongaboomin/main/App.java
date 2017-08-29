@@ -1,5 +1,10 @@
 package xyz.dongaboomin.main;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import org.bouncycastle.asn1.pkcs.RSAPrivateKey;
+import org.bouncycastle.asn1.pkcs.RSAPublicKey;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -21,6 +26,7 @@ import xyz.dongaboomin.user.BCrypt;
 import xyz.dongaboomin.user.controller.UserController;
 import xyz.dongaboomin.user.dto.UserDTO;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,6 +136,19 @@ public class App {
                 List<PartManageDTO> items = manageController.showUserManageList(limit, offset, user.getCircle_id());
                 push.put("result_code",200);
                 push.put("items",items);
+
+                try {
+                    Algorithm algorithm = Algorithm.HMAC256("secret");
+                    String token = JWT.create()
+                            .withIssuer("auth0")
+                            .sign(algorithm);
+                    System.out.println(token);
+                } catch (UnsupportedEncodingException exception){
+                    //UTF-8 encoding not supported
+                } catch (JWTCreationException exception){
+                    //Invalid Signing configuration / Couldn't convert Claims.
+                }
+
                 return push;
             }, new JsonTransformer());
         });
