@@ -17,8 +17,8 @@ public class ManageController {
     public List<PartManageDTO> showUserManageList(int limit, int offset, int circle_id){
         return model.showUserManageList(limit, offset, circle_id);
     }
-    public Long countTable(){
-        return model.countTabel();
+    public Long countTable(int circle_id){
+        return model.countTabel(circle_id);
     }
 
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ManageModel {
     List<PartManageDTO> showUserManageList(int limit, int offset, int circle_id);
-    long countTabel();
+    long countTabel(int circle_id);
 }

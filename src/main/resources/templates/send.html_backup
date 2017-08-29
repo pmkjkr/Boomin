@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+
+
+    <link href="/bootstrap/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/flat-ui.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="/css/total.css" />
+</head>
+<body>
+    <div class="navv">
+        <ul class="container">
+            <li><a href="/manage/list">회원목록</a></li>
+            <li>|</li>
+            <li><a href="/letter/write">쪽지</a></li>
+            <li>|</li>
+            <li><a href="/attend/list">참석여부</a></li>
+            <li>|</li>
+            <li><a class="active" href="/send/list">보냄</a></li>
+        </ul>
+    </div> <!-- End Nav -->
+    <div class="container">
+        <div class="flat-form">
+            <ul class="tabs">
+                <li>
+                    <a href="#tab_notice" class="active" onclick="loadUserList(1);">공지사항</a>
+                    <!--<a href="#tab_notice" class="active" onclick="makePagination()">공지사항</a>-->
+                </li>
+                <li>
+                    <a href="#tab_attend" onclick="loadUserList_circle(1);">참석여부</a>
+                    <!--<a href="#tab_attend" onclick="makePagination()">참석여부</a>-->
+                </li>
+            </ul>
+            <!--  tabs 끝 -->
+            <!--@thymesVar id="noticeCount" type="String"-->
+            <!--@thymesVar id="circleCount" type="String"-->
+            <div id="tab_notice" class="form-action show">
+                <table class="manage_users_table">
+                </table>
+                <div class="pageDiv">
+                    <ul class="pagination">
+                        <li class="previous"><a href="#fakelink" class="fui-arrow-left" onclick="previousPage()"></a></li>
+                        <!--<hidden th:each="i : ${#numbers.sequence(1,noticeCount)}">-->
+                            <!--<li><a th:text="${i}" th:onclick="${'javascript:loadUserList(' + i + ')'}"></a></li>-->
+                        <!--</hidden>-->
+                        <div id="showPageNotice">
+                        </div>
+                        <li class="next"><a href="#fakelink" class="fui-arrow-right" onclick="nextPage()"></a></li>
+                    </ul>
+                </div> <!-- /pagination -->
+            </div>
+            <div id="tab_attend" class="form-action hide">
+                <table class="manage_users_table">
+                </table>
+                <div class="pageDiv">
+                    <ul class="pagination">
+                        <li class="previous"><a href="#fakelink" class="fui-arrow-left" onclick="previousPage()"></a></li>
+                        <!--<hidden th:each="i : ${#numbers.sequence(1,circleCount)}">-->
+                            <!--<li><a th:text="${i}" th:onclick="${'javascript:loadUserList_circle(' + i + ')'}"></a></li>-->
+                        <!--</hidden>-->
+                        <div id="showPageCircle">
+                        </div>
+                        <li class="next"><a href="#fakelink" class="fui-arrow-right" onclick="nextPage()"></a></li>
+                    </ul>
+                </div> <!-- /pagination -->
+            </div>
+        </div>
+        <!--flat_form 끝  -->
+    </div>
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="/bootstrap/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/vendor/video.js"></script>
+    <script src="/bootstrap/js/flat-ui.min.js"></script>
+    <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script>
+        (function( $ ) {
+            // constants
+            var SHOW_CLASS = 'show',
+                HIDE_CLASS = 'hide',
+                ACTIVE_CLASS = 'active';
+
+            $( '.tabs' ).on( 'click', 'li a', function(e){
+                e.preventDefault();
+                var $tab = $( this ),
+                    href = $tab.attr( 'href' );
+
+                $( '.active' ).removeClass( ACTIVE_CLASS );
+                $tab.addClass( ACTIVE_CLASS );
+
+                $( '.show' )
+                    .removeClass( SHOW_CLASS )
+                    .addClass( HIDE_CLASS )
+                    .hide();
+
+                $(href)
+                    .removeClass( HIDE_CLASS )
+                    .addClass( SHOW_CLASS )
+                    .hide()
+                    .fadeIn( 550 );
+            });
+        })( jQuery );
+    </script>
+    <script th:inline="javascript">
+        var selectedTab = 0;
+        var noticeCount = [[${noticeCount}]];
+        if (noticeCount<5){
+            var isNoticeFirst = true;
+            var isNoticeLast = true;
+        }else{
+            var isNoticeFirst = true;
+            var isNoticeLast = false;
+        }
+        var circleCount = [[${circleCount}]];
+        if (circleCount<5){
+            var isCircleFirst = true;
+            var isCircleLast = true;
+        }else{
+            var isCircleFirst = true;
+            var isCircleLast = false;
+        }
+        console.log("send에서 noticeCount :: "+noticeCount+", circleCount :: "+circleCount);
+        var noticeCurrentMaxIndex = 1;
+        var circleCurrentMaxIndex = 1;
+
+        $("document").ready(loadUserList(1));
+        $("document").ready(makePagination());
+
+        function previousPage(){
+            if (selectedTab===0){
+                console.log("처!!음!!! noticeCount::"+noticeCount+", noticeCurrentMaxIndex::"+noticeCurrentMaxIndex+", isNoticeLast::"+isNoticeLast);
+                if (isNoticeFirst===false){
+                    $("#showPageNotice").empty();
+                    if (isNoticeLast){
+                        console.log("isNoticeLast=true일 때 기존 noticeCurrentMaxIndex::"+noticeCurrentMaxIndex);
+                        noticeCurrentMaxIndex = makeFarFiveTime(noticeCurrentMaxIndex);
+                        console.log("isNoticeLast=true일 때 이후 noticeCurrentMaxIndex::"+noticeCurrentMaxIndex);
+                    }else{
+                        console.log("isNoticeLast=false일 때 기존 noticeCurrentMaxIndex::"+noticeCurrentMaxIndex);
+                        noticeCurrentMaxIndex=noticeCurrentMaxIndex-5;
+                        console.log("isNoticeLast=false일 때 이후 noticeCurrentMaxIndex::"+noticeCurrentMaxIndex);
+                    }
+
+//                    var minusCount = 0;
+                    for (var i = makeFarFiveTime(noticeCurrentMaxIndex)+1; i<=makeFarFiveTime(noticeCurrentMaxIndex)+5; i++){
+                        if (noticeCount===i){
+                            $("#showPageNotice").append("<li><a onclick=loadUserList("+i+")>"+i+"</a></li>");
+                            isNoticeLast = true;
+                            console.log("isNoticeLast==true");
+                            break;
+                        }
+                        if (i===1){
+                            isNoticeFirst = true;
+                        }
+                        $("#showPageNotice").append("<li><a onclick=loadUserList("+i+")>"+i+"</a></li>");
+//                        minusCount++;
+                    }
+//                    noticeCurrentMaxIndex = noticeCurrentMaxIndex - minusCount;
+                    console.log("loadUserList할 페이지 :: "+(makeFarFiveTime(noticeCurrentMaxIndex)+1));
+                    loadUserList(makeFarFiveTime(noticeCurrentMaxIndex)+1);
+                    if (isNoticeLast){
+//                        noticeCurrentMaxIndex++;
+                        isNoticeLast = false;
+                    }
+                    noticeCurrentMaxIndex = makeFarFiveTime(noticeCurrentMaxIndex)+1;
+//                    if (isNoticeFirst){
+//                        noticeCurrentMaxIndex =
+//                    }
+                    console.log("나!!중!!! noticeCount::"+noticeCount+", noticeCurrentMaxIndex::"+noticeCurrentMaxIndex+", isNoticeLast::"+isNoticeLast);
+                }
+            }else{
+                console.log("처!!음!!! circleCount::"+circleCount+", circleCurrentMaxIndex::"+circleCurrentMaxIndex+", isCircleLast::"+isCircleLast+
+                ", isCircleFirst::"+isCircleFirst);
+                if (isCircleFirst===false){
+                    $("#showPageCircle").empty();
+                    if (isCircleLast){
+                        circleCurrentMaxIndex = makeFarFiveTime(circleCurrentMaxIndex);
+                    }else{
+                        circleCurrentMaxIndex = circleCurrentMaxIndex-5;
+                    }
+                    console.log("중!!간!!! circleCount::"+circleCount+", circleCurrentMaxIndex::"+circleCurrentMaxIndex+", isCircleLast::"+isCircleLast);
+
+                    for (var i = makeFarFiveTime(circleCurrentMaxIndex)+1; i<=makeFarFiveTime(circleCurrentMaxIndex)+5; i++){
+                        if (circleCount===i){
+                            $("#showPageCircle").append("<li><a onclick=loadUserList_circle("+i+")>"+i+"</a></li>");
+                            isCircleLast = true;
+                            console.log("isCircleLast==true");
+                            break;
+                        }
+                        if (i===1){
+                            isCircleFirst = true;
+                        }
+                        $("#showPageCircle").append("<li><a onclick=loadUserList_circle("+i+")>"+i+"</a></li>");
+                    }
+                    console.log("loadUserList_Circle할 페이지 :: "+(makeFarFiveTime(circleCurrentMaxIndex)+1));
+                    loadUserList_circle(makeFarFiveTime(circleCurrentMaxIndex)+1);
+                    if (isCircleLast){
+                        circleCurrentMaxIndex++;
+                        isCircleLast = false;
+                    }
+                    console.log("나!!중!!! circleCount::"+circleCount+", circleCurrentMaxIndex::"+circleCurrentMaxIndex+", isCircleLast::"+isCircleLast);
+                }
+            }
+        }
+
+        function nextPage(){
+            if (selectedTab===0){
+                console.log("처!!음!!! noticeCount::"+noticeCount+", noticeCurrentMaxIndex::"+noticeCurrentMaxIndex);
+                if (isNoticeLast===false){
+                    isNoticeFirst = false;
+                    var plusCount = 0;
+                    $("#showPageNotice").empty();
+                    for (var i = noticeCurrentMaxIndex; i<=makeCloseFiveTime(noticeCurrentMaxIndex); i++){
+                        if (noticeCount===i){
+                            $("#showPageNotice").append("<li><a onclick=loadUserList("+i+")>"+i+"</a></li>");
+                            isNoticeLast = true;
+                            console.log("isNoticeLast==true");
+                            break;
+                        }
+                        $("#showPageNotice").append("<li><a onclick=loadUserList("+i+")>"+i+"</a></li>");
+                        plusCount++;
+                    }
+                    loadUserList(noticeCurrentMaxIndex);
+                    noticeCurrentMaxIndex+=plusCount;
+                    console.log("나!!중!!! noticeCount::"+noticeCount+", currentMaxIndex::"+noticeCurrentMaxIndex);
+                }
+            }else{
+                console.log("처!!음!!! circleCount::"+circleCount+", circleCurrentMaxIndex::"+circleCurrentMaxIndex);
+                if (isCircleLast===false){
+                    isCircleFirst = false;
+                    var plusCount = 0;
+                    $("#showPageCircle").empty();
+                    for (var i = circleCurrentMaxIndex; i<=makeCloseFiveTime(circleCurrentMaxIndex); i++){
+                        if (circleCount===i){
+                            $("#showPageCircle").append("<li><a onclick=loadUserList_circle("+i+")>"+i+"</a></li>");
+                            isCircleLast = true;
+                            console.log("isCircleLast==true");
+                            break;
+                        }
+                        $("#showPageCircle").append("<li><a onclick=loadUserList_circle("+i+")>"+i+"</a></li>");
+                        plusCount++;
+                    }
+                    loadUserList_circle(circleCurrentMaxIndex);
+                    circleCurrentMaxIndex+=plusCount;
+                    console.log("나!!중!!! circleCount::"+circleCount+", circleCurrentMaxIndex::"+circleCurrentMaxIndex);
+                }
+            }
+        }
+
+        function makePagination() {
+//            if (selectedTab===0){
+                if (noticeCount<5) {
+                    console.log("noticeCount<5");
+                    for (var i = 0; i<noticeCount; i++){
+                        $("#showPageNotice").append("<li><a onclick=loadUserList("+(noticeCurrentMaxIndex)+")>"+(noticeCurrentMaxIndex)+"</a></li>");
+                        noticeCurrentMaxIndex++;
+                    }
+                }else{
+                    for (var i = 0; i<5; i++){
+                        $("#showPageNotice").append("<li><a onclick=loadUserList("+(noticeCurrentMaxIndex)+")>"+(noticeCurrentMaxIndex)+"</a></li>");
+                        noticeCurrentMaxIndex++;
+                    }
+                }
+//            }else{
+                if (circleCount<5) {
+                    console.log("circleCount<5");
+                    for (var i = 0; i<circleCount; i++){
+                        $("#showPageCircle").append("<li><a onclick=loadUserList_circle("+(circleCurrentMaxIndex)+")>"+(circleCurrentMaxIndex)+"</a></li>");
+                        circleCurrentMaxIndex++;
+                    }
+                }else{
+                    for (var i = 0; i<5; i++){
+                        $("#showPageCircle").append("<li><a onclick=loadUserList_circle("+(circleCurrentMaxIndex)+")>"+(circleCurrentMaxIndex)+"</a></li>");
+                        circleCurrentMaxIndex++;
+                    }
+                }
+//            }
+        }
+
+        function makeCloseFiveTime(count){
+            if (count%5==1){
+                return count+4;
+            }else if (count%5==2){
+                return count+3;
+            }else if (count%5==3){
+                return count+2;
+            }else if (count%5==4){
+                return count+1;
+            }else{
+                return count;
+            }
+        }
+
+        function makeFarFiveTime(count){
+            if (count%5==1){
+                return count-1;
+            }else if (count%5==2){
+                return count-2;
+            }else if (count%5==3){
+                return count-3;
+            }else if (count%5==4){
+                return count-4;
+            }else{
+                return count-5;
+            }
+        }
+
+        function loadUserList(index) {
+            selectedTab = 0;
+            $.ajax({
+                type: "GET",
+                url: "/send/api/normal/"+index,
+                error: function () {
+                    alert("통신실패!");
+                },
+                success : function (data) {
+
+                    $(".manage_users_table").empty();
+                    $(".manage_users_table").append("<tr><th>번호</th><th>제목</th><th>내용</th><th>날짜</th></tr>");
+                    for (var i in data) {
+                        console.log(data[i]);
+                        $(".manage_users_table").append("<tr><td>"+data[i]['id']+"</td>"
+                            +"<td>"+data[i]['title']+"</td>"
+                            +"<td>"+data[i]['body']+"</td>"
+                            +"<td>"+data[i]['updated_at']+"</td></tr>");
+                    }
+                }
+            });
+        }
+
+        function loadUserList_circle(index) {
+            selectedTab = 1;
+            $.ajax({
+                type: "GET",
+                url: "/send/api/circle/"+index,
+                error: function (request,status,error) {
+                    console.log("request : "+request+"| status : "+status+"| error : "+error)
+                },
+                success : function (data) {
+
+                    $(".manage_users_table").empty();
+                    $(".manage_users_table").append("<tr><th>번호</th><th>제목</th><th>내용</th><th>날짜</th></tr>");
+                    for (var i in data) {
+//                        $(".manage_users_table").append("<tr><td>"+data[i]['id']+"</td>"
+//                            +"<td><a href='attend/detail?id="+(data[i]['id'])+"'>"+data[i]['title']+"</a></td>"
+//                            +"<td>"+data[i]['body']+"</td>"
+//                            +"<td>"+data[i]['updated_at']+"</td></tr>");
+                        console.log(data[i]);
+                        $(".manage_users_table").append("<tr><td>"+data[i]['id']+"</td>"
+                            +"<td>"+data[i]['title']+"</td>"
+                            +"<td>"+data[i]['body']+"</td>"
+                            +"<td>"+data[i]['updated_at']+"</td></tr>");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
