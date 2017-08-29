@@ -2534,13 +2534,33 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   border-radius: 6px;
   word-spacing: -0.5px;
 }
+.paginationjs-pages>ul {
+  position: relative;
+  display: block;
+  background: #d6dbdf;
+  color: #ffffff;
+  padding: 0;
+  display: inline-block;
+  border-radius: 6px;
+  word-spacing: -0.5px;
+}
 @media (min-width: 768px) {
   .pagination {
+    display: inline-block;
+  }
+  .paginationjs-pages>ul{
     display: inline-block;
   }
 }
 @media (max-width: 767px) {
   .pagination {
+    height: 41px;
+    padding: 0 55px 0 52px;
+    overflow: auto;
+    white-space: nowrap;
+    border-radius: 6px;
+  }
+  .paginationjs-pages>ul {
     height: 41px;
     padding: 0 55px 0 52px;
     overflow: auto;
@@ -2554,11 +2574,26 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   vertical-align: middle;
   word-spacing: normal;
 }
+.paginationjs-pages>ul li {
+  display: inline-block;
+  margin-right: -2px;
+  vertical-align: middle;
+  word-spacing: normal;
+}
 .pagination li a {
+  position: static;
+}
+.paginationjs-pages>ul li a {
   position: static;
 }
 .pagination li.active > a,
 .pagination li.active > span {
+  background-color: #F7947A;
+  color: #ffffff;
+  border-color: #dfe2e5;
+}
+.paginationjs-pages>ul li.active > a,
+.paginationjs-pages>ul li.active > span {
   background-color: #F7947A;
   color: #ffffff;
   border-color: #dfe2e5;
@@ -2573,10 +2608,26 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   color: #ffffff;
   border-color: #dfe2e5;
 }
+.paginationjs-pages>ul li.active > a,
+.paginationjs-pages>ul li.active > span,
+.paginationjs-pages>ul li.active > a:hover,
+.paginationjs-pages>ul li.active > span:hover,
+.paginationjs-pages>ul li.active > a:focus,
+.paginationjs-pages>ul li.active > span:focus {
+  background-color: #F7947A;
+  color: #ffffff;
+  border-color: #dfe2e5;
+}
 .pagination li.active.previous > a,
 .pagination li.active.next > a,
 .pagination li.active.previous > span,
 .pagination li.active.next > span {
+  margin: 0;
+}
+.paginationjs-pages>ul li.active.previous > a,
+.paginationjs-pages>ul li.active.next > a,
+.paginationjs-pages>ul li.active.previous > span,
+.paginationjs-pages>ul li.active.next > span {
   margin: 0;
 }
 .pagination li.active.previous > a,
@@ -2594,8 +2645,28 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   background-color: #F7947A;
   color: #ffffff;
 }
+.paginationjs-pages>ul li.active.previous > a,
+.paginationjs-pages>ul li.active.next > a,
+.paginationjs-pages>ul li.active.previous > span,
+.paginationjs-pages>ul li.active.next > span,
+.paginationjs-pages>ul li.active.previous > a:hover,
+.paginationjs-pages>ul li.active.next > a:hover,
+.paginationjs-pages>ul li.active.previous > span:hover,
+.paginationjs-pages>ul li.active.next > span:hover,
+.paginationjs-pages>ul li.active.previous > a:focus,
+.paginationjs-pages>ul li.active.next > a:focus,
+.paginationjs-pages>ul li.active.previous > span:focus,
+.paginationjs-pages>ul li.active.next > span:focus {
+  background-color: #F7947A;
+  color: #ffffff;
+}
 .pagination li:first-child > a,
 .pagination li:first-child > span {
+  border-radius: 6px 0 0 6px;
+  border-left: none;
+}
+.paginationjs-pages>ul li:first-child > a,
+.paginationjs-pages>ul li:first-child > span {
   border-radius: 6px 0 0 6px;
   border-left: none;
 }
@@ -2603,7 +2674,14 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 .pagination li:first-child.previous + li > span {
   border-left-width: 0;
 }
+.paginationjs-pages>ul li:first-child.previous + li > a,
+.paginationjs-pages>ul li:first-child.previous + li > span {
+  border-left-width: 0;
+}
 .pagination li:last-child {
+  margin-right: 0;
+}
+.paginationjs-pages>ul li:last-child {
   margin-right: 0;
 }
 .pagination li:last-child > a,
@@ -2612,6 +2690,14 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 .pagination li:last-child > span:hover,
 .pagination li:last-child > a:focus,
 .pagination li:last-child > span:focus {
+  border-radius: 0 6px 6px 0;
+}
+.paginationjs-pages>ul li:last-child > a,
+.paginationjs-pages>ul li:last-child > span,
+.paginationjs-pages>ul li:last-child > a:hover,
+.paginationjs-pages>ul li:last-child > span:hover,
+.paginationjs-pages>ul li:last-child > a:focus,
+.paginationjs-pages>ul li:last-child > span:focus {
   border-radius: 0 6px 6px 0;
 }
 .pagination li.previous > a,
@@ -2624,12 +2710,33 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   padding: 12px 17px;
   background-color: transparent;
 }
+.paginationjs-pages>ul li.previous > a,
+.paginationjs-pages>ul li.next > a,
+.paginationjs-pages>ul li.previous > span,
+.paginationjs-pages>ul li.next > span {
+  border-right: 2px solid #e4e7ea;
+  font-size: 16px;
+  min-width: auto;
+  padding: 12px 17px;
+  background-color: transparent;
+}
 .pagination li.next > a,
 .pagination li.next > span {
   border-right: none;
 }
+.paginationjs-pages>ul li.next > a,
+.paginationjs-pages>ul li.next > span {
+  border-right: none;
+}
 .pagination li.disabled > a,
 .pagination li.disabled > span {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-right-color: #dfe2e5;
+  cursor: not-allowed;
+}
+.paginationjs-pages>ul li.disabled > a,
+.paginationjs-pages>ul li.disabled > span {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.3);
   border-right-color: #dfe2e5;
@@ -2644,9 +2751,32 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   background-color: rgba(255, 255, 255, 0.4);
   color: #ffffff;
 }
+.paginationjs-pages>ul li.disabled > a:hover,
+.paginationjs-pages>ul li.disabled > span:hover,
+.paginationjs-pages>ul li.disabled > a:focus,
+.paginationjs-pages>ul li.disabled > span:focus,
+.paginationjs-pages>ul li.disabled > a:active,
+.paginationjs-pages>ul li.disabled > span:active {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
 @media (max-width: 767px) {
   .pagination li.next,
+   .pagination li.previous {
+     background-color: #d6dbdf;
+     position: absolute;
+     right: 0;
+     top: 0;
+     z-index: 10;
+     border-radius: 0 6px 6px 0;
+   }
   .pagination li.previous {
+    left: 0;
+    right: auto;
+    border-radius: 6px 0 0 6px;
+  }
+  .paginationjs-pages>ul li.next,
+  .paginationjs-pages>ul li.previous {
     background-color: #d6dbdf;
     position: absolute;
     right: 0;
@@ -2654,7 +2784,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
     z-index: 10;
     border-radius: 0 6px 6px 0;
   }
-  .pagination li.previous {
+  .paginationjs-pages>ul li.previous {
     left: 0;
     right: auto;
     border-radius: 6px 0 0 6px;
@@ -2677,6 +2807,23 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   -webkit-transition: 0.25s ease-out;
           transition: 0.25s ease-out;
 }
+.paginationjs-pages>ul li > a,
+ .paginationjs-pages>ul li > span {
+   display: inline-block;
+   background: transparent;
+   border: none;
+   border-left: 2px solid #e4e7ea;
+   color: #ffffff;
+   font-size: 14px;
+   line-height: 16px;
+   min-height: 41px;
+   min-width: 41px;
+   outline: none;
+   padding: 12px 10px;
+   text-align: center;
+   -webkit-transition: 0.25s ease-out;
+   transition: 0.25s ease-out;
+ }
 .pagination li > a:hover,
 .pagination li > span:hover,
 .pagination li > a:focus,
@@ -2684,8 +2831,20 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   background-color: #F7947A;
   color: #ffffff;
 }
+.paginationjs-pages>ul li > a:hover,
+.paginationjs-pages>ul li > span:hover,
+.paginationjs-pages>ul li > a:focus,
+.paginationjs-pages>ul li > span:focus {
+  background-color: #F7947A;
+  color: #ffffff;
+}
 .pagination li > a:active,
 .pagination li > span:active {
+  background-color: #F7947A;
+  color: #ffffff;
+}
+.paginationjs-pages>ul li > a:active,
+.paginationjs-pages>ul li > span:active {
   background-color: #F7947A;
   color: #ffffff;
 }

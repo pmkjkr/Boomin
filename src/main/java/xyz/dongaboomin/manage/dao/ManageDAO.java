@@ -28,10 +28,11 @@ public class ManageDAO implements ManageModel{
     }
 
     @Override
-    public long countTabel() {
+    public long countTabel(int circle_id) {
         try (Connection conn = sql2o.open()) {
-            String sql = "select count(*) from normal_users";
+            String sql = "select count(*) from normal_users a join user_circles b on a.id = b.user_id where circle_id = :circle_id";
             return conn.createQuery(sql)
+                    .addParameter("circle_id", circle_id)
                     .executeScalar(Long.class);
         }
     }
